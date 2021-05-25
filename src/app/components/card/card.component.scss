@@ -1,0 +1,33 @@
+h3 {
+  text-align: center;
+}
+
+.card-image-holder {
+  text-align: center;
+
+  img {
+    width: 250px;
+  }
+}
+
+.card-inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .card-button {
+    margin-bottom: 1rem;
+    padding: 10px;
+    border: 1px solid white;
+    background-color: #989898;
+    color: white;
+    transition: all .3s ease-out;
+
+    &:hover {
+      cursor: pointer;
+      background-color: white;
+      color: black;
+    }
+  }
+}
