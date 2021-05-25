@@ -1,15 +1,16 @@
 <div class="search-container">
-    <label for="search-bar">Lookup a Pokemon</label>
-    <input type="text" name="search" id="search-bar" #searchValue placeholder="e.g. Bulbasaur" required>
-    <button id="test-button" (click)="get(searchValue.value)">Test data</button>
+    <label for="search-bar"><h1><span class="blue">Poké</span><span class="yellow">Find</span></h1></label>
+    <input type="text" name="search" id="search-bar" #searchValue placeholder="e.g. Rillaboom or 812" required>
+    <button id="search-button" (click)="get(searchValue.value.toLowerCase())">Find Pokemon</button>
+    <span class="not-found" *ngIf="visible">Couldn't find that pokemon, please provide a real name or id.</span>
 </div>
 
-<app-result></app-result>
-
-<h2>These might get your interest</h2>
+<h2>These Pokemon might get your interest:</h2>
 
 <div class="examples">
   <div class="example-card"><app-card (cardEvent)="recieveId($event)"></app-card></div>
   <div class="example-card"><app-card (cardEvent)="recieveId($event)"></app-card></div>
   <div class="example-card"><app-card (cardEvent)="recieveId($event)"></app-card></div>
 </div>
+
+<app-result [id]="id"></app-result>

@@ -1,5 +1,13 @@
-<div class="result-modal" #resultModal>
+<div class="result-modal" #resultModal style="display: none">
   <div class="result-modal-inner">
     <span class="result-modal-close" (click)="closeModal()">X</span>
+    <div class="pokemon-information">
+      <div class="pokemon-title">
+        <h1>{{name | uppercase}}</h1>
+      </div>
+      <div class="pokemon-image">
+        <img src="{{sprite}}" alt="Image of {{name}}">
+      </div>
+    </div>
   </div>
 </div>

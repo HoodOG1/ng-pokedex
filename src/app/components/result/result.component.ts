@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ElementRef } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
 
@@ -12,16 +12,27 @@ export class ResultComponent implements OnInit {
 
   @ViewChild('resultModal') el: ElementRef;
 
+  data: any;
+  name: string;
+  sprite: string;
+
   constructor(private dataService: DataService) {}
 
   ngOnInit(): void {
   }
 
-  displayModal(id:number) {
+  displayModal(id:string) {
     this.el.nativeElement.style.display = 'flex';
-    let data = this.dataService.getData(`${id}`).subscribe((data) => {
-      console.log(data);
-    })
+    this.data = this.dataService.getData(`${id}`).subscribe(
+      res => {
+      this.data = res;
+      this.name = res['species']['name'];
+      this.sprite = res['sprites']['front_default']
+      console.log(this.data)
+    },
+      err => {
+        console.log('Couldnt get HTTP-Request')
+    });
   }
 
   closeModal() {

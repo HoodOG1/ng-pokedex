@@ -9,17 +9,17 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class CardComponent implements OnInit {
 
-  @Output() cardEvent = new EventEmitter<number>();
+  @Output() cardEvent = new EventEmitter<string>();
 
   data = {};
   name:string;
   sprite:string;
-  id:number;
+  id:string;
 
   constructor(private dataService: DataService) { }
 
   ngOnInit(): void {
-    this.id = Math.floor((Math.random() * 898) + 1);
+    this.id = Math.floor((Math.random() * 898) + 1).toString();
     
     this.data = this.dataService.getData(`${this.id}`).subscribe((data) => {
       this.data = data;

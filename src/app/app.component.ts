@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { ResultComponent } from './components/result/result.component';
 import { DataService } from './services/data.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -10,21 +10,35 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'ng-pokedex';
   data = undefined;
+  visible:boolean = false;
 
-  constructor(private dataService: DataService, private router: Router) { }
 
-  id: number;
+  @ViewChild(ResultComponent) resultComponent:ResultComponent;
+
+  constructor(private dataService: DataService) { }
+
+  id: string;
 
   get(query: string): void {
-    this.dataService.getData(query).subscribe(data => {
-      console.log(data);
-    }, (err) => {
+    this.dataService.getData(query).subscribe(res => {
+      this.testFunction(query)
+    },
+    err => {
       console.error(`There is no Pokemon found named ${query}. Be sure to type the name correctly!`);
+      this.visible = true;
+    },
+    () => {
+      this.visible = false;
     })
   }
 
-  recieveId($event: number) {
+  testFunction(id: string) {
+    this.resultComponent.displayModal(id);
+  }
+
+  recieveId($event: string) {
     this.id = $event;
     console.log(`App: recieved event and id ${$event}`)
+    this.testFunction($event)
   }
 }
