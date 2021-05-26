@@ -1,8 +1,22 @@
 <div class="search-container">
-    <label for="search-bar"><h1><span class="blue">Poké</span><span class="yellow">Find</span></h1></label>
-    <input type="text" name="search" id="search-bar" #searchValue placeholder="e.g. Rillaboom or 812" required>
-    <button id="search-button" (click)="get(searchValue.value.toLowerCase())">Find Pokemon</button>
+    <form class="example-form">
+      <label for="search-bar"><h1><span class="blue">Poké</span><span class="yellow">Find</span></h1></label>
+      <input type="text"
+             id="search-bar"
+             placeholder="Name or ID"
+             [formControl]="control"
+             [matAutocomplete]="auto"
+             #searchValue>
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let pokemon of filteredPokemons | async" [value]="pokemon">
+          {{pokemon}}
+        </mat-option>
+      </mat-autocomplete>
+      <button id="search-button" (click)="get(searchValue.value.toLowerCase())">Find Pokemon</button>
+    </form>
     <span class="not-found" *ngIf="visible">Couldn't find that pokemon, please provide a real name or id.</span>
+
+
 </div>
 
 <h2>These Pokemon might get your interest:</h2>

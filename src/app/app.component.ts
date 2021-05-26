@@ -1,23 +1,39 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ResultComponent } from './components/result/result.component';
 import { DataService } from './services/data.service';
+import { FormControl } from '@angular/forms';
+import pokemons from './data/pokemon.json';
+import { Observable } from 'rxjs';
+import { startWith, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  title = 'ng-pokedex';
+export class AppComponent implements OnInit {
+  
+  @ViewChild(ResultComponent) resultComponent:ResultComponent;
+
   data = undefined;
   visible:boolean = false;
 
+  control = new FormControl();
+  pokemons: string[];
+  filteredPokemons: Observable<string[]>
 
-  @ViewChild(ResultComponent) resultComponent:ResultComponent;
-
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService) {
+    this.pokemons = pokemons;
+  }
 
   id: string;
+
+  ngOnInit() {
+    this.filteredPokemons = this.control.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value))
+    );
+  }
 
   get(query: string): void {
     this.dataService.getData(query).subscribe(res => {
@@ -40,5 +56,14 @@ export class AppComponent {
     this.id = $event;
     console.log(`App: recieved event and id ${$event}`)
     this.callModal($event)
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = this._normalizeValue(value);
+    return this.pokemons.filter(pokemon => this._normalizeValue(pokemon).includes(filterValue));
+  }
+
+  private _normalizeValue(value: string): string {
+    return value.toLowerCase().replace(/\s/g, '');
   }
 }
