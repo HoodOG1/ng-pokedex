@@ -12,7 +12,7 @@ import { startWith, map } from 'rxjs/operators';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  
+
   @ViewChild(ResultComponent) resultComponent:ResultComponent;
 
   data = undefined;
