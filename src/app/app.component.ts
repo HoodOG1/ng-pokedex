@@ -21,7 +21,7 @@ export class AppComponent {
 
   get(query: string): void {
     this.dataService.getData(query).subscribe(res => {
-      this.testFunction(query)
+      this.callModal(query)
     },
     err => {
       console.error(`There is no Pokemon found named ${query}. Be sure to type the name correctly!`);
@@ -32,13 +32,13 @@ export class AppComponent {
     })
   }
 
-  testFunction(id: string) {
+  callModal(id: string) {
     this.resultComponent.displayModal(id);
   }
 
   recieveId($event: string) {
     this.id = $event;
     console.log(`App: recieved event and id ${$event}`)
-    this.testFunction($event)
+    this.callModal($event)
   }
 }

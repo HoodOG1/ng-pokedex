@@ -6,12 +6,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ResultComponent } from './components/result/result.component';
 import { CardComponent } from './components/card/card.component';
+import { TypeDirective } from './directives/type.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     ResultComponent,
-    CardComponent
+    CardComponent,
+    TypeDirective
   ],
   imports: [
     BrowserModule,
