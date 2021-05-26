@@ -25,9 +25,6 @@ export class CardComponent implements OnInit {
       this.data = data;
       this.name = data['species']['name'];
       this.sprite = data['sprites']['front_default']
-    }, () => {}, () => {
-      console.log(this.name)
-      console.log(this.data)
     });
   }
 

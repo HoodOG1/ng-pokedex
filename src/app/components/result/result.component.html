@@ -3,10 +3,26 @@
     <span class="result-modal-close" (click)="closeModal()">X</span>
     <div class="pokemon-information">
       <div class="pokemon-title">
-        <h1>{{name | uppercase}}</h1>
+        <h1>{{usefulData.name | uppercase}}</h1>
       </div>
+      <div class="pokemon-types">
+        <span *ngFor="let type of usefulData.types" [appType]="type">{{type | titlecase }}</span>
+      </div>
+      <div class="pokemon-type"></div>
       <div class="pokemon-image">
-        <img src="{{sprite}}" alt="Image of {{name}}">
+        <img [src]="sprite" (mouseover)="sprite = usefulData.shiny" (mouseout)="sprite = usefulData.sprite" alt="Image of {{usefulData.name}}">
+        <p style="font-size: 12px; margin: 0;">Hover over image to see the shiny version</p>
+      </div>
+      <div class="pokemon-stats">
+        <h2>Base-Stats</h2>
+        <ul>
+          <li>HP: {{usefulData.hp}}</li>
+          <li>Attack: {{usefulData.att}}</li>
+          <li>Defense: {{usefulData.def}}</li>
+          <li>Sp.Atk: {{usefulData.satt}}</li>
+          <li>Sp.Def: {{usefulData.sdef}}</li>
+          <li>Speed: {{usefulData.spd}}</li>
+        </ul>
       </div>
     </div>
   </div>
