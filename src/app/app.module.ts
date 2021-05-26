@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { ResultComponent } from './components/result/result.component';
 import { CardComponent } from './components/card/card.component';
 import { TypeDirective } from './directives/type.directive';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { TypeDirective } from './directives/type.directive';
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
